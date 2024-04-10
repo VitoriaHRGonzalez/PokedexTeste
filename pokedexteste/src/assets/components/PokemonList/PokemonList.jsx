@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import {api} from "../../../services/Index";
 import PokemonCard from "../PokemonCard/PokemonCard";
+import { getAllPokemons } from "../../../services/Pokedex";
+
+import './PokemonList.css'
+
+import { useGetPokemons } from "../../../services/Pokedex";
 
 const PokemonList = () => {
-  const [pokemon, setPokemon] = useState();
+  const {isLoading, data, execute} = useGetPokemons()
   useEffect(() => {
-    api
-      .get("/pokemon?limit=151")
-      .then((response) => {
-        console.log(response);
-        setPokemon(response.data?.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+      try {
+        execute()
+      } catch(e) {
+        throw new Error(e)
+      }
+      
+  }, [execute]);
+
   return (
-    <div>
-      {pokemon?.map((pokemon, index) => (
-        <PokemonCard name={pokemon.name}
-        key={index} />
+    <div className="pokemon-list">
+      {data && data?.map((pokemon, index) => (
+        <PokemonCard key={index} name={pokemon.name} imageUrl={pokemon.imageUrl} types={pokemon.types} moves={pokemon.moves} id={pokemon.id}/>
         
       ))}
 

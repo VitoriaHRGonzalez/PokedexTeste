@@ -12,8 +12,8 @@ function App() {
 }
 
   return (
-      <div>
-        <h1>Página para testes</h1>
+      <div className='App'>
+        <h1>Pokédex</h1>
         <SearchBar onSearch={handleSearch} />
         <PokemonList />
       </div>
