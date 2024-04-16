@@ -1,31 +1,42 @@
-import React, { useEffect, useState } from "react";
-import {api} from "../../../services/Index";
-import PokemonCard from "../PokemonCard/PokemonCard";
-import { getAllPokemons } from "../../../services/Pokedex";
+import  { useContext, useEffect, useState} from 'react';
+import PokemonCard from '../PokemonCard/PokemonCard';
 
-import './PokemonList.css'
+import './PokemonList.css';
 
-import { useGetPokemons } from "../../../services/Pokedex";
+import { useGetPokemons } from '../../../services/Pokedex';
+
+import { PokemonContext } from '../../../../utils/PokemonContext';
+
+import Pokemon from '../Pokemon/Pokemon';
+
 
 const PokemonList = () => {
-  const {isLoading, data, execute} = useGetPokemons()
+  const {isLoading, data, execute} = useGetPokemons();
+  const [openModal, setOpenModal] = useState(false);
+
+
   useEffect(() => {
-      try {
-        execute()
-      } catch(e) {
-        throw new Error(e)
-      }
-      
+    try {
+      execute();
+    } catch(e) {
+      throw new Error(e);
+    }   
   }, [execute]);
 
   return (
-    <div className="pokemon-list">
-      {data && data?.map((pokemon, index) => (
-        <PokemonCard key={index} name={pokemon.name} imageUrl={pokemon.imageUrl} types={pokemon.types} moves={pokemon.moves} id={pokemon.id}/>
-        
-      ))}
+    <>
+      <PokemonContext.Provider value={data}>
+        <div className="pokemon-list">
+            
+          <div onClick={() => setOpenModal(true)}> 
+            <PokemonCard />
+          </div>
+          <Pokemon isOpen={openModal}/>
+  
+        </div>
+      </PokemonContext.Provider>
 
-    </div>
+    </>
   );
 };
 export default PokemonList;
