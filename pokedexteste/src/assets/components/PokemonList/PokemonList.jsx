@@ -7,13 +7,8 @@ import { useGetPokemons } from '../../../services/Pokedex';
 
 import { PokemonContext } from '../../../../utils/PokemonContext';
 
-import Pokemon from '../Pokemon/Pokemon';
-
-
 const PokemonList = () => {
   const {isLoading, data, execute} = useGetPokemons();
-  const [openModal, setOpenModal] = useState(false);
-
 
   useEffect(() => {
     try {
@@ -23,19 +18,17 @@ const PokemonList = () => {
     }   
   }, [execute]);
 
+  console.log(data, 'data');
+
   return (
     <>
       <PokemonContext.Provider value={data}>
         <div className="pokemon-list">
-            
-          <div onClick={() => setOpenModal(true)}> 
+          <div> 
             <PokemonCard />
           </div>
-          <Pokemon isOpen={openModal}/>
-  
         </div>
       </PokemonContext.Provider>
-
     </>
   );
 };

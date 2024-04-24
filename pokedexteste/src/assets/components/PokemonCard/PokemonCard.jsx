@@ -4,11 +4,12 @@ import './PokemonCard.css';
 import { useContext, useState } from 'react';
 
 import { PokemonContext } from '../../../../utils/PokemonContext';
+
 import PokemonModal from '../Pokemon/Pokemon';
 
-// const PrimeiraLetraMaiuscula = (string) => {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// };
+const PrimeiraLetraMaiuscula = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 const FormatoId = (num) => {
   return num.toString().padStart(3, '0');
@@ -16,25 +17,30 @@ const FormatoId = (num) => {
 
 // eslint-disable-next-line react/prop-types
 const PokemonCard = () => {
-  const [PokemonId, setPokemonId] = useState();
+  const [pokemonId, setPokemonId] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
   const pokemon = useContext(PokemonContext);
-  console.log(PokemonId);
+  console.log(pokemonId);
+
+  const toggleShowModal = () => {
+    setIsOpen((p) => !p);
+  };
 
   return (
     <div className='container'>
       {pokemon && pokemon?.map((pokemon, index) => (
-        <div className="pokemon-card" key={index} onClick={() => setPokemonId(pokemon.id)}>
+        <div className="pokemon-card" key={index} onClick={() => { setPokemonId(pokemon.id); setIsOpen(true);}}>
           <p className="pokemon-id" >#{FormatoId(pokemon.id)}</p>
           <img className="pokemon-img" src={pokemon.imageUrl} alt={pokemon.name} />
           <div className="card-name">
-            <h3>{pokemon.name}</h3>
+            <h3>{PrimeiraLetraMaiuscula(pokemon.name)}</h3>
           </div>
         </div>
       ))};
-      <PokemonModal id={PokemonId} isOpen={isOpen} />
-
+      {pokemonId && isOpen && (
+        <PokemonModal id={pokemonId} toggleShowModal={toggleShowModal} />
+      )}
     </div>
   );
 };

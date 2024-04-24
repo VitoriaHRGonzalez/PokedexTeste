@@ -17,15 +17,15 @@ export const getAllPokemons = async(options) => {
     })
   );
   return payload;
-
 };
 
 const getPokemonStatus = async(url) => {
   const response = await fetch(url);
   const pokemonResponse = await response.json();
-  const {id, types} = pokemonResponse;
-  return {id, types};
+  console.log(pokemonResponse);
+  return pokemonResponse;
 };
+
 
 export const getPokemonImageUrl = (id) => {   //Estrutura onde vai concatenar o link com o id de cada pokemon para pegar a imagem
   return `${ImageBaseURL}/${id}.png`;

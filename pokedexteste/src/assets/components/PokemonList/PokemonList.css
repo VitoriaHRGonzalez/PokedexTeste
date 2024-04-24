@@ -1,10 +1,8 @@
 .pokemon-list {
-    /* flex-wrap: wrap; */
     background-color: #fff;
     border-radius: 20px;
     width: 90vw;
-    height: 100vh;
+    height: fit-content;
     padding: 2rem;
-
   }
   

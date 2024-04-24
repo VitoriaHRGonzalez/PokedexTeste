@@ -1,0 +1,77 @@
+/* Botar as cores de cada tipo */
+
+.Type {
+    background-color: #666666;
+}
+
+.Normal {
+    background-color: #AAA67F;
+}
+
+.Fighting {
+    background-color: #C12239;
+}
+
+.Flying {
+    background-color: #A891EC;
+}
+
+.Ground {
+    background-color: #DEC16B;
+}
+
+.Poison {
+    background-color: #A43E9E;
+}
+
+.Rock {
+    background-color:#B69E31 ;
+}
+
+.Bug {
+    background-color: #A7B723;
+}
+
+.Ghost {
+    background-color: #70559B;
+}
+
+.Steel {
+    background-color: #B7B9D0;
+}
+
+.Fire {
+    background-color: #F57D31;
+}
+
+.Water {
+    background-color: #6493EB;
+}
+
+.Grass {
+    background-color: #74CB48;
+}
+
+.Eletric {
+    background-color: #F9CF30;
+}
+
+.Psychic {
+    background-color: #FB5584;
+}
+
+.Ice {
+    background-color: #9AD6DF;
+}
+
+.Dragon {
+    background-color: #7037FF;
+}
+
+.Dark {
+    background-color: #75574C;
+}
+
+.Fairy {
+    background-color: #E69EAC;
+}
