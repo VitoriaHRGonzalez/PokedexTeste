@@ -1,77 +1,95 @@
-/* Botar as cores de cada tipo */
-
-.Type {
+.type {
     background-color: #666666;
+    color: #666666;
 }
 
-.Normal {
+.normal {
     background-color: #AAA67F;
+    color: #AAA67F;
 }
 
-.Fighting {
+.fighting {
     background-color: #C12239;
+    color: #C12239;
 }
 
-.Flying {
+.flying {
     background-color: #A891EC;
+    color: #A891EC;
 }
 
-.Ground {
+.ground {
     background-color: #DEC16B;
+    color: #DEC16B;
 }
 
-.Poison {
+.poison {
     background-color: #A43E9E;
+    color: #A43E9E;
 }
 
-.Rock {
+.rock {
     background-color:#B69E31 ;
+    color:#B69E31 ;
 }
 
-.Bug {
+.bug {
     background-color: #A7B723;
+    color: #A7B723;
 }
 
-.Ghost {
+.ghost {
     background-color: #70559B;
+    color: #70559B;
 }
 
-.Steel {
+.steel {
     background-color: #B7B9D0;
+    color: #B7B9D0;
 }
 
-.Fire {
+.fire {
     background-color: #F57D31;
+    color: #F57D31;
 }
 
-.Water {
+.water {
     background-color: #6493EB;
+    color: #6493EB;
 }
 
-.Grass {
+.grass {
     background-color: #74CB48;
+    color: #74CB48;
 }
 
-.Eletric {
+.electric {
     background-color: #F9CF30;
+    color: #F9CF30;
 }
 
-.Psychic {
+.psychic {
     background-color: #FB5584;
+    color: #FB5584;
 }
 
-.Ice {
+.ice {
     background-color: #9AD6DF;
+    color: #9AD6DF;
 }
 
-.Dragon {
+.dragon {
     background-color: #7037FF;
+    color: #7037FF;
 }
 
-.Dark {
+.dark {
     background-color: #75574C;
+    color: #75574C;
 }
 
-.Fairy {
+.fairy {
     background-color: #E69EAC;
+    color: #E69EAC;
 }
+

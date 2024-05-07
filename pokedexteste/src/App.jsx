@@ -1,7 +1,7 @@
 import './App.css';
 
-import SearchBar from './assets/components/SearchBar/SearchBar';
 import PokemonList from './assets/components/PokemonList/PokemonList';
+import SearchBar from './assets/components/SearchBar/SearchBar';
 
 import pokeball from './assets/components/Icones/Pokeball.svg';
 

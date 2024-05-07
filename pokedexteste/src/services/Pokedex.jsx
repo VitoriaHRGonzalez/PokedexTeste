@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react';
 const ImageBaseURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
 const baseURL = 'https://pokeapi.co/api/v2';
 
-
 export const getAllPokemons = async(options) => {
   const response = await fetch(`${baseURL}/pokemon?limit=151`, options);  //Retorna tudo da API
   const pokemonResponse = await response.json(); //Transforma no formano json
@@ -11,9 +10,18 @@ export const getAllPokemons = async(options) => {
   const payload = await Promise.all(
 
     results.map(async (pokemon) => { //Pegar os 151 pokemons, e pra cada pokemon, chama o getStatus  e chama o getImage
-      const {id,types} = await getPokemonStatus(pokemon.url);
-      const imageUrl = getPokemonImageUrl(id);
-      return {id, name:pokemon.name, types, imageUrl};
+      const pokemonResponse = await getPokemonStatus(pokemon.url);
+      const imageUrl = getPokemonImageUrl(pokemonResponse.id);
+      return {
+        id:pokemonResponse.id,
+        name:pokemon.name,
+        types:pokemonResponse.types,
+        imageUrl,
+        weight:pokemonResponse.weight,
+        height:pokemonResponse.height,
+        moves:pokemonResponse.abilities,
+        stats:pokemonResponse.stats
+      };
     })
   );
   return payload;
