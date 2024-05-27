@@ -1,11 +1,9 @@
 
 import './PokemonCard.css';
 
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { PokemonContext } from '../../../contexts/PokemonContext';
-
-import PokemonModal from '../../../assets/components/Pokemon/Pokemon';
+import PokemonModal from '../Pokemon/Pokemon';
 
 const PrimeiraLetraMaiuscula = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,11 +14,9 @@ const FormatoId = (num) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const PokemonCard = () => {
+const PokemonCard = (pokemon) => {
   const [pokemonId, setPokemonId] = useState();
   const [isOpen, setIsOpen] = useState(false);
-
-  const pokemon = useContext(PokemonContext);
 
   const toggleShowModal = () => {
     setIsOpen((p) => !p);

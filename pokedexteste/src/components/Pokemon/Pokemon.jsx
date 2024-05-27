@@ -1,15 +1,12 @@
 import { useContext } from 'react';
 import '../TypeTag/TypeTag.css';
-import './fire.css';
-
 import './Pokemon.css';
 
-import pokeball from '../Icones/Pokeball.svg';
-import height from '../Icones/height.svg';
-import weight from '../Icones/weight.svg';
+import height from '../../assets/icons/height.svg';
+import pokeball from '../../assets/icons/pokeball.svg';
+import weight from '../../assets/icons/weight.svg';
 
-import { PokemonContext } from '../../../../utils/PokemonContext';
-
+import { PokemonContext } from '../../contexts/PokemonContext';
 
 const FormatoId = (num) => {
   return num.toString().padStart(3, '0');
@@ -19,35 +16,38 @@ const PrimeiraLetraMaiuscula = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-
-
 // eslint-disable-next-line react/prop-types
 function PokemonModal  ({id,toggleShowModal}) {
 
   const pokemon = useContext(PokemonContext);
-  
-  console.log(pokemon[0]);
-  console.log('TIPO', pokemon[id-1].types[0].type.name);
 
+
+  
   return (
-    <> 
+    <>
+      {console.log('id', pokemon)};
       {id && (
         <>
-          <div className={`background-pokemon  ${pokemon[id-1].types[0].type.name}`}>
+          <div id='card' className={`background-pokemon  ${pokemon[id-1]?.types[0].type.name}`}>
             <img className='pokeballCard-image' src={pokeball} />
             <div className="pokemon-head">
-              <h2>{PrimeiraLetraMaiuscula(pokemon[id-1].name)}</h2>
-              <p className="pokemonCard-id">#{FormatoId(pokemon[id-1].id)}</p>
+              <h2>{pokemon[id-1]?.name}</h2>
+              <p className="pokemonCard-id">#{pokemon[id-1]?.id}</p>
             </div>
             <div className="card-info">
-              <img className="pokemonCard-img" src={pokemon[id-1].imageUrl} alt={pokemon[id-1].name}/>
+              <img className="pokemonCard-img" src={pokemon[id-1]?.imageUrl} alt={pokemon[id-1]?.name}/>
+            
               <div className="types-container">
-                {pokemon[id-1].types.map((type, index) => (
-                  <p key={index} className={`pokemon-types ${pokemon[id-1].types[0].type.name}`} >
-                    {PrimeiraLetraMaiuscula(type.type.name) + ' '}
+                <p className={`pokemon-types ${pokemon[id - 1]?.types[0].type.name}`}>
+                  {pokemon[id - 1]?.types[0].type.name + ' '}
+                </p>
+                {pokemon[id - 1].types.length > 1 && (
+                  <p className={`pokemon-types ${pokemon[id - 1]?.types[1].type.name}`}>
+                    {pokemon[id - 1]?.types[1].type.name + ' '}
                   </p>
-                ))}
+                )}
               </div>
+
               <h3 className='h3'> About</h3>
               <div className='pokemon-info'>
 
@@ -68,9 +68,9 @@ function PokemonModal  ({id,toggleShowModal}) {
                 </div>
 
                 <div className='pokemon-moves'>
-                  {pokemon[id-1].moves.map((moves, index) => (
-                    <p key={index}>
-                      {PrimeiraLetraMaiuscula(moves.ability.name)}
+                  {pokemon[id-1].moves.map((moves, setPokemonId) => (
+                    <p key={setPokemonId}>
+                      {moves.ability.name}
                     </p>
                   ))}
                   <p style={{fontSize:13, marginTop:0,color:'gray'}}>Moves</p>
@@ -85,18 +85,16 @@ function PokemonModal  ({id,toggleShowModal}) {
                   <p>SATK</p>
                   <p>SDEF</p>
                   <p>SPD</p>
-
                 </div>
                 <div className='base-stats-date'>
-                  {pokemon[id-1].stats.map((stats, index) => (
-                    <p key={index}> {FormatoId(stats.base_stat)} </p>
+                  {pokemon[id-1].stats.map((stats, pokemonId) => (
+                    <p key={pokemonId}> {stats.base_stat} </p>
                   ))}
                 </div>
                 <div className='aaa'>
-                  {pokemon[id-1].stats.map((stats, index) => (
-                    <div key={index} className={`progress-bar ${pokemon[id-1].types[0].type.name}`}>
-                      <div key= {index} className={`progress-bar-fill ${pokemon[id-1].types[0].type.name}`} style={{width: `${stats.base_stat}px` }}></div>
-                    </div>
+                  {pokemon[id-1].stats.map((stats, pokemonId) => (
+                    <><div key={pokemonId} className={`progress-bar ${pokemon[id - 1].types[0].type.name}`}></div><div key={pokemonId} className={`progress-bar-fill ${pokemon[id - 1].types[0].type.name}`} style={{ width: `${stats.base_stat}px` }}></div></>
+                    
                   ))}
                 </div>
 
