@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { getAllPokemons } from '../services/pokedex';
 
 export const PokemonContext = createContext(null);
@@ -7,7 +7,11 @@ export const useGetPokemons = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null); 
   const [data, setData] = useState(null);
+  const [filteredPokemonList, setFilteredPokemonList] = useState(null);
 
+  useEffect(() => {
+    setFilteredPokemonList(data);
+  }, [data]);
   
   const getData = async(options = {}) => {
     try {
@@ -29,16 +33,18 @@ export const useGetPokemons = () => {
     isLoading,
     error,
     data,
+    filteredPokemonList,
+    setFilteredPokemonList,
     getData
   };
 };
 
 // eslint-disable-next-line react/prop-types
 export const PokemonProvider = ({children}) => {
-  const { data } = useGetPokemons();
+  const pokemonData = useGetPokemons();
 
   return (
-    <PokemonContext.Provider value={data}>
+    <PokemonContext.Provider value={pokemonData}>
       {children}
     </PokemonContext.Provider>
   );

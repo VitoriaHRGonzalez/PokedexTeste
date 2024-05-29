@@ -1,37 +1,33 @@
-import './App.css';
-
-import pokeball from './assets/icons/pokeball.svg';
-import PokemonCard from './components/PokemonCard/PokemonCard';
-import SearchBar from './components/SearchBar/SearchBar';
-
 import { useEffect, useState } from 'react';
 import { PokemonContext, useGetPokemons } from './contexts/PokemonContext';
 
-function App() {
-  const [filteredPokemons, setFilteredPokemons] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+import pokeball from './assets/icons/pokeball.svg';
+import PokemonList from './components/PokemonList/PokemonList';
+import SearchBar from './components/SearchBar/SearchBar';
+import FilteredPokemons from './services/FilteredPokemons';
 
+import './App.css';
+
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('option1');
+
+  const handleOptionChange = (option) => { 
+    setSortOption(option);
+  };
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
   const {data, getData} = useGetPokemons();
-
-  useEffect(() => {
-    if(data) {
-      const filtered = data.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()));
-      setFilteredPokemons(filtered);
-    }
-  }, [data, searchTerm]);
-
-  console.log('Lista filtrada:',filteredPokemons);
+  const filteredPokemons = FilteredPokemons({data, searchTerm, sortOption});
   
   useEffect(() => {
     try {
       getData();
     } catch(e) {
       throw new Error(e);
-    }   
+    }
   }, []);
 
   return (
@@ -40,15 +36,13 @@ function App() {
         <img className='pokeball-image' src={pokeball} />
         <h1>Pokédex</h1>
       </div>
-
       <PokemonContext.Provider value={filteredPokemons}>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} onOptionChange={handleOptionChange} /> 
         <div className='pokemon-list'>
-          <PokemonCard pokemons={filteredPokemons} />
+          <PokemonList pokemons={filteredPokemons} />
         </div>
       </PokemonContext.Provider>
     </div>
-
   );
 }
 export default App;
